@@ -6,6 +6,8 @@ TX Ultimate is a touch switch with RGB LEDs, haptic motor and I2S audio speaker.
 
 ## Functions
 
+Quick and dirty skeleton driver. All touch events are reported to a RESULT topic. There's a beginning of a command interface which will be expanded to have calibration of the touch channels.
+
 Touch panel is divided into 10 vertical segments or channels. 
 It has the following events: 
 - touch event with position - triggers on each touch
@@ -36,7 +38,10 @@ tele/tasmota/RESULT = {"TXUltimate":{"Action":"Swipe left","From":0,"To":252}}
 | Data | N | |
 | Checksum | 2 | CRC16 | CRC-16/CCITT-FALSE checksum  starting from the version byte
 
-Quick and dirty skeleton driver. All touch events are reported to a RESULT topic. There's a beginning of a command interface which will be expanded to have calibration of the touch channels.
+Explanation:
+All Data larger than one byte are transmitted in big-endian mode.
+
+In general, a command-response synchronization mechanism is used, where the sender expects to receive a response packet corresponding to the sent command. If the sender does not receive a correct response packet within the specified timeout, it will trigger a timeout transmission.
 
 ## Thanks to
 Would not be possible without the help of [smarthomeyourself.de](https://smarthomeyourself.de/) and his [esphome custom component](https://github.com/SmartHome-yourself/sonoff-tx-ultimate-for-esphome/)
