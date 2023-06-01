@@ -17,7 +17,7 @@ It has the following events:
 
 Shown in console and in MQTT as:
 
-```json
+```
 tele/tasmota/RESULT = {"TXUltimate":{"Action":"Touch","Channel":3}}
 tele/tasmota/RESULT = {"TXUltimate":{"Action":"Multi"}}
 tele/tasmota/RESULT = {"TXUltimate":{"Action":"Short","Channel":4}}
