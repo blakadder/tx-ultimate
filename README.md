@@ -27,14 +27,14 @@ tele/tasmota/RESULT = {"TXUltimate":{"Action":"Swipe left","From":0,"To":252}}
 
 ## Serial Protocol
 
-Field | Length | (Byte) | Explanation
- ---  | ---  | ---  |
-Frame | Header | 2 | 0xaa55
-Version | 1 | 0x01 |
-Opcode | 1 | Specific  command  type |
-Data | Length | 1 | Data  Length  0-64
-Data | N |
-Checksum | 2 | CRC16 | CRC-16/CCITT-FALSE checksum  starting from the version byte
+| Field | Length | (Byte) | Explanation
+| ---  | ---  | ---  | ---
+| Frame | Header | 2 | 0xaa55
+| Version | 1 | 0x01 |
+| Opcode | 1 | Specific  command  type |
+| Data | Length | 1 | Data  Length  0-64
+| Data | N | |
+| Checksum | 2 | CRC16 | CRC-16/CCITT-FALSE checksum  starting from the version byte
 
 Quick and dirty skeleton driver. All touch events are reported to a RESULT topic. There's a beginning of a command interface which will be expanded to have calibration of the touch channels.
 
