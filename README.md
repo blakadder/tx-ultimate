@@ -31,8 +31,8 @@ tele/tasmota/RESULT = {"TXUltimate":{"Action":"Swipe left","From":0,"To":252}}
 
 ## Serial Protocol
 
-| Field | Length | (Byte) | Explanation
-| ---  | ---  | ---  | ---
+| Field | Length (Byte) | Explanation
+| ---  | ---  | --- 
 | Frame Header | 2 | 0xaa55
 | Version | 1 | 0x01 |
 | Opcode | 1 | Specific  command  type |
