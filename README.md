@@ -1,5 +1,7 @@
 # Tasmota Berry driver for Sonoff TX Ultimate
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S650JEK) &emsp; <a href="https://paypal.me/tasmotatemplates"><img src="https://img.shields.io/static/v1?logo=paypal&label=&message=Donate via PayPal&color=slategrey"></a>
+
 Basic Berry driver for Sonoff TX Ultimate touch panel IC CA51F353S3. 
 
 TX Ultimate is a touch switch with RGB LEDs, haptic motor and I2S audio speaker. It is available from [Sonoff's store](https://itead.cc/product/sonoff-tx-ultimate-smart-touch-wall-switch/ref/34) in 1, 2 and 3 gang versions.
