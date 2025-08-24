@@ -1,4 +1,9 @@
 # Touch events handlers
+var eventtopic = "stat/lrms01"
+var led_state = []
+for i:0..27
+    led_state += ['#000000']
+end
 
 def get_leds_for_channel(ch)
     if ch <= 2
@@ -24,15 +29,20 @@ def get_leds_for_power(power)
     end
 end
 
-var eventtopic = "stat/lrms01"
-var led_state = []
-for i:0..27
-    led_state.push('#000000')
+# Set initial state of leds
+var power_state = [tasmota.get_power(0), tasmota.get_power(1), tasmota.get_power(2), tasmota.get_power(3), tasmota.get_power(4)]
+def TXUltimate_UpdateLeds()
+    for i:0..size(power_state)-1
+        if power_state[i]
+            var leds = get_leds_for_power(i)
+            TXUltimate_Led(leds, 'ON')
+        else
+            var leds = get_leds_for_power(i)
+            TXUltimate_Led(leds, 'OFF')
+        end
+    end
 end
 
-def TXUltimate_Touch(value, trigger, msg)
-    tasmota.cmd('Buzzer')
-end
 
 def TXUltimate_Led(leds, state)
     import string
@@ -57,6 +67,10 @@ def TXUltimate_Led(leds, state)
     for i:0..size(led_state)-1
         tasmota.cmd(string.format("Led%d %s", i+1, led_state[i]))
     end
+end
+
+def TXUltimate_Touch(value, trigger, msg)
+    tasmota.cmd('Buzzer')
 end
 
 def TXUltimate_Short(value, trigger, msg)
@@ -125,6 +139,7 @@ def TXUltimate_Swipe(value, trigger, msg)
         # NOTE: Power0 manage all channels include backlight
         tasmota.cmd('Power0 0')
     end
+    TXUltimate_UpdateLeds()
 end
 
 
@@ -136,19 +151,8 @@ def TXUltimate_Multi(value, trigger, msg)
     mqtt.publish("stat/tasmota_E09620/EVENT", "Multi", false)
     # tasmota.publish_result("{'Action': 'Multi'}", "EVENT")
 end
+TXUltimate_UpdateLeds()
 
-
-# Set initial state of leds
-var power_state = [tasmota.get_power(0), tasmota.get_power(1), tasmota.get_power(2), tasmota.get_power(3), tasmota.get_power(4)]
-for i:0..size(power_state)-1
-    if power_state[i]
-        var leds = get_leds_for_power(i)
-        TXUltimate_Led(leds, 'ON')
-    else
-        var leds = get_leds_for_power(i)
-        TXUltimate_Led(leds, 'OFF')
-    end
-end
 
 #tasmota.remove_rule("TXUltimate#Action=Touch", "TXUltimate_Touch")
 tasmota.add_rule("TXUltimate#Action=Touch", TXUltimate_Touch, "TXUltimate_Touch")
@@ -166,5 +170,5 @@ tasmota.add_rule("TXUltimate#Action=Swipe left", TXUltimate_Swipe, "TXUltimate_S
 
 #tasmota.remove_rule("TXUltimate#Action=Multi", "TXUltimate_Multi")
 tasmota.add_rule("TXUltimate#Action=Multi", TXUltimate_Multi, "TXUltimate_Multi")
-#tasmota.cmd('Buzzer')
+tasmota.cmd('Buzzer')
 print("Events loaded.")
