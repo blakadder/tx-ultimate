@@ -24,7 +24,7 @@ def get_leds_for_power(power)
     end
 end
 
-var eventtopic = "stat/tasmota_E09620"
+var eventtopic = "stat/lrms01"
 var led_state = []
 for i:0..27
     led_state.push('#000000')
@@ -50,7 +50,7 @@ def TXUltimate_Led(leds, state)
     for i:0..size(leds)-1
         led_state[leds[i]-1] = color
     end
-    for i:0..4
+    for i:0..2
         tasmota.cmd("Color #F0F0F0")
         tasmota.cmd("Color #000000")
     end
